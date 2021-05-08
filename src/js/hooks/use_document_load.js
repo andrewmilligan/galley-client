@@ -11,6 +11,7 @@ export default function useDocumentLoad(opts = {}) {
     if (!socket || !editor) return
 
     socket.once('load-document', doc => {
+      console.log('Document loaded', doc)
       editor.setContents(doc)
       editor.enable()
     })

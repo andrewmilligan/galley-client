@@ -29,9 +29,21 @@ function TextControls(props) {
     editor.format('bold', !isBold, Editor.sources.USER)
     setIsBold(!isBold)
   }
+
   const italic = () => {
     editor.format('italic', !isItalic, Editor.sources.USER)
     setIsItalic(!isItalic)
+  }
+
+  const image = () => {
+    const range = editor.getSelection(true)
+    editor.insertEmbed(
+      range.index,
+      'image',
+      'https://quilljs.com/0.20/assets/images/cloud.png',
+      Editor.sources.USER
+    )
+    editor.setSelection(range.index + 1, Editor.sources.SILENT)
   }
 
   editor.on('selection-change', () => {
@@ -44,10 +56,7 @@ function TextControls(props) {
     <Container>
       <Button onClick={bold} active={isBold}>Bold</Button>
       <Button onClick={italic} active={isItalic}>Italic</Button>
-      <Button>Link</Button>
-      <Button>Quote</Button>
-      <Button>H<sub>1</sub></Button>
-      <Button>H<sub>2</sub></Button>
+      <Button onClick={image}>Image</Button>
     </Container>
   )
 }
