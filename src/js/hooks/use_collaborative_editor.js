@@ -12,5 +12,5 @@ export default function useCollaborativeEditor(documentId) {
   // Once socket and editor exist, load the document
   useDocument({ documentId, socket, editor })
 
-  return ref
+  return [ref, editor]
 }

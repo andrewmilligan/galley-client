@@ -1,17 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import Quill from 'quill'
-
-const TOOLBAR_OPTIONS = [
-  [{ header: [1, 2, 3, 4, 5, 6, false] }],
-  [{ font: [] }],
-  [{ list: 'ordered' }, { list: 'bullet' }],
-  ['bold', 'italic', 'underline'],
-  [{ color: [] }, { background: [] }],
-  [{ script: 'sub' }, { script: 'super' }],
-  [{ align: [] }],
-  ['image', 'blockquote', 'code-block'],
-  ['clean'],
-]
+import Editor from 'js/editor'
 
 export default function useEditor() {
   const [editor, setEditor] = useState()
@@ -25,13 +13,8 @@ export default function useEditor() {
 
     editorRef.current.innerHTML = ''
 
-    const quill = new Quill(editorRef.current, {
-      theme: 'snow',
-      modules: { toolbar: TOOLBAR_OPTIONS },
-    })
+    const quill = new Editor(editorRef.current)
     quill.disable()
-    quill.setText('Loading...')
-
     setEditor(quill)
   }, [])
 

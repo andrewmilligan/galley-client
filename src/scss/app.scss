@@ -4,7 +4,6 @@
 
 body {
   background-color: #F3F3F3;
-  margin: 0;
 }
 
 .container .ql-editor {
@@ -16,13 +15,13 @@ body {
   background-color: white;
 }
 
-.container .ql-container.ql-snow {
+.container .ql-container {
   border: none;
   display: flex;
   justify-content: center;
 }
 
-.container .ql-toolbar.ql-snow {
+.container .ql-toolbar {
   display: flex;
   justify-content: center;
   position: sticky;

@@ -1,15 +1,16 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import 'quill/dist/quill.snow.css'
 import useCollaborativeEditor from 'js/hooks/use_collaborative_editor'
+import TextControls from './TextControls'
 
 function Editor() {
   const { id: documentId } = useParams()
 
-  const ref = useCollaborativeEditor(documentId)
+  const [ref, editor] = useCollaborativeEditor(documentId)
 
   return (
     <div className='container'>
+      {editor && <TextControls editor={editor} />}
       <div ref={ref} />
     </div>
   )
