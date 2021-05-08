@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import useDocumentLoad from './use_document_load'
 import useDocumentChangesFromServer from './use_document_changes_from_server'
 import useDocumentChangesFromUser from './use_document_changes_from_user'
