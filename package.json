@@ -1,5 +1,5 @@
 {
-  "name": "galley-editor",
+  "name": "galley-client",
   "version": "0.1.0",
   "main": "./src/js/main-app.js",
   "description": "Code for the Galley Editor",
