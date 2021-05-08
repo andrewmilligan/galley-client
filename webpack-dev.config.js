@@ -2,12 +2,11 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const portfinder = require('portfinder')
-const interactConfig = require('./interact-config.json')
 
-portfinder.basePort = 8000
+portfinder.basePort = 3000
 
 const parseArgs = (env) => {
-  const defaultProxyPort = env.PROXY || '3000'
+  const defaultProxyPort = env.PROXY || '8000'
   const args = require('yargs').default('proxy', defaultProxyPort).argv
   return args
 }
@@ -25,42 +24,22 @@ const config = (env, argv, port, args) => ({
   target: 'web',
   entry: {
     main: path.resolve(__dirname, './src/js/main-app.js'),
-    mount: path.resolve(__dirname, './src/js/mount.js'),
   },
   output: {
     path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
     filename: '[name].js',
   },
   devServer: {
     compress: true,
     port,
     open: true,
-    openPage: 'example.html',
     hot: true,
     contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true,
     overlay: {
       errors: true,
       warnings: false,
-    },
-    proxy: {
-      '/live-data/': {
-        /**
-         * Uncomment these lines (and comment out the rest of this object) to
-         * serve live-data locally
-         */
-        target: `http://localhost:${args.proxy}`,
-
-        /**
-         * Uncomment these lines (and comment out the rest of this object) to
-         * pull live-data from production
-         */
-        //target: 'https://interactives.ap.org',
-        //changeOrigin: true,
-        //pathRewrite: {'^/live-data': '/galley-editor/live-data'},
-      },
-      '/static/': {
-        target: `http://localhost:${args.proxy}`,
-      },
     },
   },
   module: {
@@ -141,18 +120,7 @@ const config = (env, argv, port, args) => ({
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      templateParameters: {
-        title: interactConfig.title,
-      },
       chunks: ['main'],
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'example.html',
-      template: 'src/example.html',
-      templateParameters: {
-        title: interactConfig.title,
-      },
-      chunks: ['mount'],
     }),
   ],
 })

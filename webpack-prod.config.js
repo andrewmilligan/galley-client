@@ -4,7 +4,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const interactConfig = require('./interact-config.json')
 
 module.exports = {
   mode: 'production',
@@ -18,7 +17,6 @@ module.exports = {
   },
   entry: {
     main: path.resolve(__dirname, './src/js/main-app.js'),
-    mount: path.resolve(__dirname, './src/js/mount.js'),
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -118,9 +116,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      templateParameters: {
-        title: interactConfig.title,
-      },
       chunks: ['main'],
     }),
     new MiniCssExtractPlugin({
